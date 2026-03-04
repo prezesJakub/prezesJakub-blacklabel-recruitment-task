@@ -1,62 +1,128 @@
-# Zadanie rekrutacyjne — Data Visualization (Frontend)
+# Data Visualization - Dashboard danych e-commerce
 
-## Kontekst
-Dane w pliku `data.json` pochodzą z platformy **e-commerce** i zawierają informacje o zamówieniach, m.in.:
-- czas,
-- lokalizację (kraj, miasto, dane geograficzne),
-- kategorie produktów,
-- ilości,
-- ceny,
-- dodatkowe metadane (płatność, typ klienta, urządzenie, czas dostawy).
+## Opis projektu
 
-Twoim celem jest **zrozumienie danych**, wybranie **niektórych informacji** i przedstawienie ich w **czytelnej, sensownej formie wizualnej** (dataviz).
+Projekt przedstawia analizę danych zamówień pochodzących z platformy e-commerce (plik `data.json`).  
+Celem zadania było:
 
+- zrozumienie struktury danych,
+- wybór kluczowych informacji,
+- ich sensowna agregacja,
+- przygotowanie maksymalnie 3 czytelnych wizualizacji.
 
-## Zadanie
-Przeanalizuj dane i:
-- zdecyduj, które pola są dla Ciebie istotne,
-- agreguj dane w sposób, który uznasz za sensowny,
+Priorytetem była selekcja istotnych danych oraz przejrzystość prezentacji, a nie pokazanie wszystkich dostępnych informacji.
 
-Przygotuj **maksymalnie 3** wykresy.
-- samodzielnie zdecyduj, **jakie wizualizacje** przygotujesz (na podstawie wybranych przez Ciebie danych),
-- nie narzucamy konkretnych metryk ani podziałów,
-- zależy nam na **selekcji najistotniejszych dla Ciebie informacji**, nie na pokazaniu wszystkiego.
+---
 
+## Wybór danych i sposób agregacji
 
-## Opis rozwiązania
-W pliku README dodaj opis, w którym wyjaśnisz:
-- jakie dane uznałeś/aś za kluczowe,
-- dlaczego wybrałeś/aś właśnie takie wizualizacje (typy wykresów).
+Po analizie struktury pliku zdecydowałem się skupić na metrykach związanych z przychodem, ponieważ:
 
+- przychód bezpośrednio odzwierciedla kondycję biznesową,
+- umożliwia porównanie wyników w czasie,
+- pozwala analizować rynki (kraje) oraz strukturę sprzedaży (kategorie).
 
-## Technologia i uruchomienie
-- interesuje nas **wyłącznie wersja desktopowa** (brak wymagań dot. mobile, nie dokładaj sobie niepotrzebnej pracy),
-- **nie narzucamy tech stacku** (technologia nie jest kryterium oceny):
-- framework: dowolny lub brak,
-- biblioteki: także dowolne. W naszej firmie skupiamy się głównie na Highcharts, ale nie wymagamy znajomości akurat tej biblioteki, więc jeśli chcesz użyć innej prostszej - gorąco do tego zachęcamy.
+Wykorzystane pola:
 
+- `timestamp`
+- `country`
+- `category`
+- `quantity`
+- `unitPrice`
+
+Na ich podstawie wyliczono:
+
+- **Przychód dla pojedynczego zamówienia** → `quantity × unitPrice`
+- Zagregowany przychód:
+  - według daty
+  - według kraju
+  - według kategorii produktów
+
+Dodatkowo obliczono podstawowe wskaźniki KPI:
+- całkowity przychód,
+- liczba zamówień,
+- średnia wartość zamówienia.
+
+---
+
+## Przygotowane wizualizacje
+
+Zgodnie z wymaganiami przygotowano maksymalnie 3 wykresy.
+
+### Przychód w czasie (wykres liniowy)
+
+**Cel:**  
+Identyfikacja trendów sprzedażowych oraz zmian w czasie.
+
+**Dlaczego wykres liniowy?**  
+Najlepiej sprawdza się przy danych typu time-series i umożliwia intuicyjne śledzenie trendów.
+
+---
+
+### Przychód według kraju (wykres słupkowy)
+
+**Cel:**  
+Porównanie efektywności sprzedaży między rynkami.
+
+**Dlaczego wykres słupkowy?**  
+Pozwala łatwo porównać wartości pomiędzy kategoriami oraz uporządkować je malejąco.
+
+---
+
+### Przychód według kategorii produktów (wykres słupkowy)
+
+**Cel:**  
+Analiza struktury sprzedaży oraz identyfikacja działów z najlepszymi wynikami sprzedaży.
+
+**Dlaczego wykres słupkowy?**  
+Zapewnia czytelne porównanie między kategoriami i umożliwia szybkie wychwycenie liderów sprzedaży.
+
+---
+
+## Decyzje projektowe
+
+Aby poprawić czytelność i odbiór wizualny:
+
+- dodano sekcję KPI z kluczowymi wskaźnikami na górze,
+- zastosowano przełączane zakładki (tabs) zamiast wyświetlania wszystkich wykresów jeden pod drugim,
+- zastosowano formatowanie walutowe dla lepszej czytelności danych,
+- ograniczono interfejs do wersji desktopowej (zgodnie z wymaganiami),
+- zachowano minimalistyczny, czytelny układ inspirowany dashboardami analitycznymi.
+
+Projekt koncentruje się na prostocie i przejrzystości zamiast nadmiernej liczby funkcji.
+
+## Zastosowana technologia
+
+- React (Vite)
+- Recharts (wizualizacja danych)
+- JavaScript
+- CSS (własne style)
+
+---
 
 ## Uruchomienie projektu
-W pliku README opisz także wymagania (np. Node, Python, serwer lokalny) i kroki przydatne dla nas do uruchomienia Twojego projektu.
-Projekt powinien być **łatwy do uruchomienia lokalnie** bez dodatkowych wyjaśnień.
 
+### Wymagania
 
-## Czas
-Nie oczekujemy kompletnego rozbudowanego produktu.
-Interesuje nas:
-- sposób myślenia,
-- decyzje projektowe,
-- umiejętność pracy na danych,
-- czytelność wizualna. Duży plus za fajny design.
-Nie liczy się ilość/wielkość projektu, tylko jakość połączona z prostotą i umiejętność wytłumaczenia podejścia.
+- Node.js (zalecana wersja 18+)
+- npm
 
-Przewidujemy, że wykonanie zadania powinno zająć maksymalnie kilka godzin.
-Na rozwiazanie masz dokładnie 7 dni licząc od daty otrzymania tego zadania.
+### Kroki
 
+1. Zainstaluj zależności
 
-## Jak zacząć i wysłać rozwiązanie
-- wykonaj fork tego repozytorium na swoje konto GitHub (w nazwie repozytorium powinna zawierać się nazwa Twojego profilu GH lub imię i nazwisko - tak aby była unikatowa dla wszystkich kandydatów),
-- upewnij się, że wszystkie zmiany są wypchnięte do Twojego repozytorium na GitHubie,
-- wyślij link do swojego repozytorium zawierającego rozwiązanie na adres e-mail: rekrutacja@blacklabel.net
+```bash
+npm install
+```
 
-Nie wysyłaj Pull Requesta do tego repozytorium - oceniany będzie wyłącznie kod w Twoim forku.
+2. Uruchom serwer deweloperski
+
+```bash
+npm run dev
+```
+
+3. Otwórz w przeglądarce
+
+```
+http://localhost:5173
+```
