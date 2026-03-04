@@ -1,3 +1,5 @@
+import { useState } from "react"
+import Tabs from "./components/Tabs"
 import data from "./data/data.json"
 import Layout from "./components/Layout"
 import RevenueOverTimeChart from "./components/charts/RevenueOverTimeChart"
@@ -21,12 +23,31 @@ function App() {
   const revenueByCountry = groupRevenueByCountry(enrichedOrders)
   const revenueByCategory = groupRevenueByCategory(enrichedOrders)
 
+  const [activeTab, setActiveTab] = useState("time")
+
   return (
     <Layout>
       <KPICards kpis={kpis} />
-      <RevenueOverTimeChart data={revenueByDate} />
-      <RevenueByCountryChart data={revenueByCountry} />
-      <RevenueByCategoryChart data={revenueByCategory} />
+
+      <Tabs 
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+      />
+
+      <h2>Charts</h2>
+      <div className="chart-container">
+        {activeTab === "time" && (
+          <RevenueOverTimeChart data={revenueByDate} />
+        )}
+
+        {activeTab === "country" && (
+          <RevenueByCountryChart data={revenueByCountry} />
+        )}
+
+        {activeTab === "category" && (
+          <RevenueByCategoryChart data={revenueByCategory} />
+        )}
+      </div>
     </Layout>
   )
 }
