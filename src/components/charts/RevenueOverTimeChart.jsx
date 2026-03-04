@@ -7,6 +7,7 @@ import {
     CartesianGrid,
     ResponsiveContainer
 } from "recharts"
+import { formatCurrency } from "../../utils/analytics"
 
 export default function RevenueOverTimeChart({ data }) {
     return (
@@ -25,8 +26,10 @@ export default function RevenueOverTimeChart({ data }) {
                 <LineChart data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="date" />
-                    <YAxis />
-                    <Tooltip />
+                    <YAxis tickFormatter={(value) => formatCurrency(value)} />
+                    <Tooltip
+                        formatter={(value) => formatCurrency(value)}
+                    />
                     <Line 
                         type="monotone" 
                         dataKey="revenue"
