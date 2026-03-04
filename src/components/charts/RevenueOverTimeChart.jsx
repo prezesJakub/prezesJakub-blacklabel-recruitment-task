@@ -10,7 +10,15 @@ import {
 
 export default function RevenueOverTimeChart({ data }) {
     return (
-        <div style={{ marginBottom: "60px" }}>
+        <div
+            style={{
+                background: "white",
+                padding: "24px",
+                borderRadius: "12px",
+                boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
+                marginBottom: "40px"
+            }}
+        >
             <h2>Revenue Over Time</h2>
 
             <ResponsiveContainer width="100%" height={300}>
@@ -19,7 +27,12 @@ export default function RevenueOverTimeChart({ data }) {
                     <XAxis dataKey="date" />
                     <YAxis />
                     <Tooltip />
-                    <Line type="monotone" dataKey="revenue" />
+                    <Line 
+                        type="monotone" 
+                        dataKey="revenue"
+                        stroke="#2563eb"
+                        strokeWidth={3}
+                    />
                 </LineChart>
             </ResponsiveContainer>
         </div>

@@ -9,7 +9,15 @@ import {
 
 export default function RevenueByCategoryChart({ data }) {
     return (
-        <div style={{ marginBottom: "60px" }}>
+        <div 
+            style={{ 
+                background: "white",
+                padding: "24px",
+                borderRadius: "12px",
+                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.05)",
+                marginBottom: "40px" 
+            }}
+        >
             <h2>Revenue by Category</h2>
 
             <ResponsiveContainer width="100%" height={300}>
@@ -17,7 +25,7 @@ export default function RevenueByCategoryChart({ data }) {
                     <XAxis dataKey="category" />
                     <YAxis />
                     <Tooltip />
-                    <Bar dataKey="revenue" />
+                    <Bar dataKey="revenue" fill="#2563eb" radius={[6,6,0,0]} />
                 </BarChart>
             </ResponsiveContainer>
         </div>

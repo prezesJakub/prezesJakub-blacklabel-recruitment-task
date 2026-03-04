@@ -18,10 +18,11 @@ export function groupRevenueByDate(orders) {
         map[date] += order.revenue
     })
 
-    return Object.entries(map).map(([date, revenue]) => ({ 
-        date, 
-        revenue: Number(revenue.toFixed(2))
-    }))
+    return Object.entries(map)
+        .map(([date, revenue]) => ({ 
+            date, 
+            revenue: Number(revenue.toFixed(2))
+        }))
 }
 
 export function groupRevenueByCountry(orders) {
@@ -35,10 +36,12 @@ export function groupRevenueByCountry(orders) {
         map[order.country] += order.revenue
     })
 
-    return Object.entries(map).map(([country, revenue]) => ({
-        country,
-        revenue: Number(revenue.toFixed(2))
-    }))
+    return Object.entries(map)
+        .map(([country, revenue]) => ({
+            country,
+            revenue: Number(revenue.toFixed(2))
+        }))
+        .sort((a, b) => b.revenue - a.revenue)
 }
 
 export function groupRevenueByCategory(orders) {
@@ -52,8 +55,29 @@ export function groupRevenueByCategory(orders) {
         map[order.category] += order.revenue
     })
 
-    return Object.entries(map).map(([category, revenue]) => ({
-        category,
-        revenue: Number(revenue.toFixed(2))
-    }))
+    return Object.entries(map)
+        .map(([category, revenue]) => ({
+            category,
+            revenue: Number(revenue.toFixed(2))
+        }))
+        .sort((a, b) => b.revenue - a.revenue)
+}
+
+export function calculateKPIs(orders) {
+    const totalRevenue = orders.reduce((sum, order) => sum + order.revenue, 0)
+    const totalOrders = orders.length
+    const averageOrderValue = totalRevenue / totalOrders
+
+    return {
+        totalRevenue: Number(totalRevenue.toFixed(2)),
+        totalOrders,
+        averageOrderValue: Number(averageOrderValue.toFixed(2))
+    }
+}
+
+export function formatCurrency(value) {
+    return new Intl.NumberFormat("en-IE", {
+        style: "currency",
+        currency: "EUR"
+    }).format(value)
 }

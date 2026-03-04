@@ -3,6 +3,8 @@ import Layout from "./components/Layout"
 import RevenueOverTimeChart from "./components/charts/RevenueOverTimeChart"
 import RevenueByCategoryChart from "./components/charts/RevenueByCategoryChart"
 import RevenueByCountryChart from "./components/charts/RevenueByCountryChart"
+import { calculateKPIs, formatCurrency } from "./utils/analytics"
+import KPICards from "./components/KPICards"
 
 import {
   enrichOrders,
@@ -13,6 +15,7 @@ import {
 
 function App() {
   const enrichedOrders = enrichOrders(data.orders)
+  const kpis = calculateKPIs(enrichedOrders)
 
   const revenueByDate = groupRevenueByDate(enrichedOrders)
   const revenueByCountry = groupRevenueByCountry(enrichedOrders)
@@ -20,6 +23,7 @@ function App() {
 
   return (
     <Layout>
+      <KPICards kpis={kpis} />
       <RevenueOverTimeChart data={revenueByDate} />
       <RevenueByCountryChart data={revenueByCountry} />
       <RevenueByCategoryChart data={revenueByCategory} />
